@@ -1,0 +1,78 @@
+.app-bar-container {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none;
+  padding: 0 16px;
+}
+
+.app-bar {
+  width: 100%;
+  max-width: 820px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(15, 15, 15, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 8px 20px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.app-bar:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(20, 20, 20, 0.85);
+}
+
+.app-bar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.app-bar-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.app-bar-link {
+  color: rgba(245, 245, 245, 0.7);
+  font-family: 'Space Grotesk', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.app-bar-link:hover {
+  color: #0a0a0a;
+  background-color: #F3DBC7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .app-bar {
+    padding: 6px 14px;
+    height: 48px;
+  }
+
+  .app-bar-link {
+    padding: 4px 8px;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+}
