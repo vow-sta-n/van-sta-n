@@ -4,41 +4,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement | null>(null);
-  const heroBgRef = useRef<HTMLImageElement | null>(null);
-
-  const now = new Date();
-  const monthNames = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
-  const currentMonth = monthNames[now.getMonth()];
-  const currentDay = String(now.getDate()).padStart(2, "0");
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
 
-      tl.from(".hero-date-widget", {
-        y: -30,
-        opacity: 0,
-        duration: 0.8,
-      })
-        .from(
-          ".hero-creative-tag",
-          {
-            x: -20,
-            opacity: 0,
-            duration: 0.6,
-          },
-          "-=0.4"
-        )
-        .from(
-          ".hero-title-line",
-          {
-            y: 80,
-            opacity: 0,
-            stagger: 0.2,
-            duration: 1.2,
-          },
-          "-=0.4"
-        )
+      tl.from(
+        ".hero-title-line",
+        {
+          y: 80,
+          opacity: 0,
+          stagger: 0.18,
+          duration: 1.2,
+        }
+      )
         .from(
           ".hero-desc-box",
           {
@@ -48,19 +27,6 @@ const Hero: React.FC = () => {
           },
           "-=0.6"
         );
-
-      if (heroBgRef.current && heroRef.current) {
-        gsap.to(heroBgRef.current, {
-          yPercent: 15,
-          ease: "none",
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
     }, heroRef);
 
     return () => ctx.revert();
@@ -70,79 +36,40 @@ const Hero: React.FC = () => {
     <section
       ref={heroRef}
       id="hero"
-      className="relative min-h-screen flex flex-col justify-between pt-28 pb-12 px-6 sm:px-10 lg:px-16 max-w-[1720px] mx-auto overflow-hidden select-none"
+      className="relative min-h-screen flex flex-col justify-end pt-28 pb-8 sm:pb-6 px-6 sm:px-10 lg:px-6 max-w-[1720px] mx-auto select-none"
     >
-      {/* Renaissance Oil Painting Parallax Background Plane */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        <img
-          ref={heroBgRef}
-          src="/images/hero-renaissance.jpg"
-          alt="Renaissance ceiling fresco"
-          className="w-full h-[125%] object-cover -translate-y-8 scale-105 filter brightness-90 contrast-105"
-        />
-        {/* Subtle Vignette Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]/60" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/50 via-transparent to-[#0a0a0a]/50" />
-      </div>
 
-      {/* Top Right Availability & Live Date Widget */}
-      <div className="w-full flex justify-end items-start pt-2 sm:pt-4">
-        <div className="hero-date-widget flex items-center gap-3 sm:gap-4 text-[#F8EEE4] drop-shadow-md">
-          {/* Rotating Sun / Star Glyph */}
-          <div className="w-7 h-7 sm:w-10 sm:h-10 text-[#F3DBC7] animate-spin-slow flex-shrink-0">
-            <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
-              <path d="M50 0 L58 35 L93 20 L73 50 L93 80 L58 65 L50 100 L42 65 L7 80 L27 50 L7 20 L42 35 Z" />
-            </svg>
-          </div>
+      {/* Main Grid: Left Titles (Bottom-Left) & Right Paragraph/Button (Bottom-Right) */}
+      <div className="w-full flex flex-col lg:flex-row justify-between items-end gap-8 lg:gap-10">
 
-          {/* Huge Date Display */}
-          <div className="font-serif italic font-black text-6xl sm:text-8xl lg:text-9xl leading-none tracking-tighter text-[#F8EEE4]">
-            {currentDay}
-          </div>
-
-          {/* Month & Status */}
-          <div className="flex flex-col justify-center text-left pl-1">
-            <span className="font-serif italic text-xl sm:text-3xl lg:text-4xl text-[#F8EEE4] leading-none mb-1 lowercase">
-              {currentMonth}
-            </span>
-            <span className="font-sans text-[10px] sm:text-xs uppercase tracking-wider text-white/80 font-bold leading-tight">
-              available
-              <br />
-              for work
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Grid: Left Titles & Right Paragraph/Button */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end my-auto pt-6 pb-4">
-        
-        {/* Left Column: Huge Monumental Condensed Titles */}
-        <div className="lg:col-span-7 flex flex-col justify-end">
-          <span className="hero-creative-tag font-serif italic text-2xl sm:text-4xl lg:text-5xl text-[#F8EEE4] tracking-tight block mb-0 pl-1">
-            creative
-          </span>
-
-          <div className="hero-title-line flex items-baseline leading-none">
-            <h1 className="font-monumental text-[22vw] sm:text-[18vw] lg:text-[15vw] font-extrabold text-[#F8EEE4] tracking-[-0.04em] leading-[0.82] drop-shadow-lg">
-              DESIGNER
-            </h1>
-            <span className="font-serif italic text-3xl sm:text-5xl lg:text-6xl text-[#F3DBC7] ml-2 lg:ml-4 font-normal">
-              &
-            </span>
-          </div>
-
-          <div className="hero-title-line leading-none mt-1 sm:mt-2">
-            <h1 className="font-monumental text-[22vw] sm:text-[18vw] lg:text-[15vw] font-extrabold text-[#F8EEE4] tracking-[-0.04em] leading-[0.82] drop-shadow-lg">
-              DEVELOPER
+        {/* Left Column: Monumental Titles (Bottom-Left) */}
+        <div className="w-full lg:w-[56%] flex flex-col justify-end items-start text-[#F8EEE4] font-semibold ">
+          <div className="hero-title-line">
+            <h1 className=" flex items-baseline gap-2 sm:gap-4">
+              <span className="font-monumental text-[33vw] sm:text-[9.5vw] lg:text-[16.5vw] uppercase tracking-[0.002em]">Designer</span>
+              <span className="font-serif font-semibold text-[2rem] text-[#F3DBC7] tracking-tighter leading-none">
+                &
+              </span>
             </h1>
           </div>
+
+          <div className="hero-title-line leading-10 mt-10">
+            <h1 className="font-monumental text-[33vw] sm:text-[9.5vw] lg:text-[16.5vw] uppercase tracking-[0.002em]">
+              Developer
+            </h1>
+          </div>
+
+          {/* <div className="hero-title-line">
+            <h1 className="font-monumental text-[33vw] sm:text-[9.5vw] lg:text-[12vw] uppercase font-semibold  tracking-[-0.03em]">
+              Psychologist
+            </h1>
+          </div> */}
         </div>
 
-        {/* Right Column: Bio Paragraph & Contact Button */}
-        <div className="lg:col-span-5 flex flex-col items-start lg:items-end justify-end space-y-6 lg:pl-6 pb-2 sm:pb-4">
-          <div className="hero-desc-box space-y-3 max-w-lg text-left lg:text-left">
-            <p className="font-sans font-extrabold text-base sm:text-lg lg:text-xl uppercase tracking-tight text-[#F8EEE4] leading-[1.3] drop-shadow-md">
+        {/* Right Column: Bio Paragraph & Contact Button (40% Width) */}
+        <div className="w-full lg:w-[40%] flex flex-col items-start lg:items-end justify-end space-y-6 pb-2 sm:pb-3">
+          <div className="hero-desc-box w-full space-y-3 text-left">
+            <p className="w-full font-sans font-medium text-base sm:text-lg lg:text-[1.85rem] uppercase tracking-tight text-[#F8EEE4] leading-[1.3] indent-12 sm:indent-16 lg:indent-20">
               I AM A DEVELOPER AND UX/UI DESIGNER BASED IN ITALY. I HAVE MANY YEARS OF EXPERIENCE IN CONSULTING IN ALL AREAS OF DIGITAL. I LOVE MINIMAL AND BRUTALIST DESIGN. I LOVE NATURE, PIZZA AND ART.
             </p>
           </div>
@@ -170,8 +97,6 @@ const Hero: React.FC = () => {
 
       </div>
 
-      {/* Subtle bottom divider */}
-      <div className="w-full h-[1px] bg-white/10 mt-4" />
     </section>
   );
 };

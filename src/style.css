@@ -1,17 +1,251 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   1. TUSKER GROTESK (Display / Monumental / Headings / Numbers)
+   ========================================================================== */
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2500Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2600Semibold.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2600Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2700Bold.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2700Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2800Super.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2800Super.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Tusker Grotesk';
+  src: url('./assets/tusker-grotesk/TuskerGrotesk-2800Super.otf') format('opentype'),
+       url('./assets/tusker-grotesk/TuskerGrotesk-2800Super.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   2. NEUE MONTREAL (Body / Navigation / UI / Subtitles / Meta)
+   ========================================================================== */
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./assets/neue-montreal/neuemontreal-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./assets/neue-montreal/neuemontreal-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./assets/neue-montreal/neuemontreal-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./assets/neue-montreal/neuemontreal-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./assets/neue-montreal/neuemontreal-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./assets/neue-montreal/neuemontreal-mediumitalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./assets/neue-montreal/neuemontreal-bolditalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   3. MIGRA (Artistic Serif / Editorial Italics / Quotes / Accents)
+   ========================================================================== */
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migra-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migra-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migra-semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migra-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migra-extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migraitalic-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migraitalic-mediumitalic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migraitalic-semibolditalic.otf') format('opentype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Migra';
+  src: url('./assets/migra-font/migraitalic-bolditalic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
   --color-background: #0a0a0a;
-  --color-foreground: #f5f5f5;
-  --color-accent: #F3DBC7;
-  --color-highlight: #F8EEE4;
+  --color-foreground: #f5eee6;
+  --color-accent: #f3dbc7;
+  --color-highlight: #f8eee4;
 
-  --font-condensed: 'Big Shoulders Display', 'Bebas Neue', sans-serif;
-  --font-serif-italic: 'Playfair Display', 'Italiana', serif;
-  --font-display: 'Syne', sans-serif;
-  --font-mono: 'Space Grotesk', monospace;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-serif: 'Cinzel', serif;
+  --font-display: 'Tusker Grotesk', sans-serif;
+  --font-condensed: 'Tusker Grotesk', sans-serif;
+  --font-monumental: 'Tusker Grotesk', sans-serif;
+  --font-serif: 'Migra', serif;
+  --font-serif-italic: 'Migra', serif;
+  --font-sans: 'Neue Montreal', sans-serif;
+  --font-mono: 'Neue Montreal', monospace;
+}
+
+/* Base Typography Architecture (Patrick David exact style) */
+html, body {
+  font-family: 'Neue Montreal', sans-serif;
+  color: #f5eee6;
+  line-height: 1.2;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Tusker Grotesk', sans-serif;
+  text-transform: uppercase;
+}
+
+p, span, a, button, input, textarea {
+  font-family: 'Neue Montreal', sans-serif;
+}
+
+.font-migra, .font-serif, .font-serif-italic {
+  font-family: 'Migra', serif !important;
+}
+
+.font-neue, .font-sans {
+  font-family: 'Neue Montreal', sans-serif !important;
 }
 
 /* Custom Scrollbar */
@@ -50,16 +284,7 @@ html.lenis, html.lenis body {
   pointer-events: none;
 }
 
-/* Custom Cursor */
-#cursor.active {
-  transform: translate(-50%, -50%) scale(2.5);
-  background-color: #F3DBC7;
-}
 
-#cursor-follower.active {
-  transform: translate(-50%, -50%) scale(1.6);
-  border-color: #F3DBC7;
-}
 
 /* Keyframes */
 @keyframes marquee {
@@ -92,9 +317,8 @@ html.lenis, html.lenis body {
 
 /* Monumental Hero Condensed Font Styles */
 .font-monumental {
-  font-family: 'Big Shoulders Display', 'Bebas Neue', sans-serif;
-  letter-spacing: -0.03em;
-  line-height: 0.82;
+  font-family: 'Tusker Grotesk', 'Big Shoulders Display', 'Bebas Neue', sans-serif;
+  line-height: 0.85;
   text-transform: uppercase;
 }
 
