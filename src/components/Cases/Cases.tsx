@@ -16,58 +16,97 @@ export interface CaseItemData {
 export const CASES_DATA: CaseItemData[] = [
   {
     id: "1",
-    title: "Barbara Scerbo",
+    title: "BARBARA SCERBO",
     tag: "01 / ART DIRECTION & DEV",
     category: "SELECTED CASE 01",
     desc: "A bespoke digital showcase engineered for high-fashion photography and avant-garde art direction. Featuring custom typography choreography, smooth kinetic gallery transitions, and brutalist framing.",
-    disciplines: "UX/UI DESIGN, FULL-STACK DEVELOPMENT",
+    disciplines: "UX/UI DESIGN, DEVELOPMENT",
     awards: "06 HONORS & RECOGNITIONS",
     img: "/images/case-1.jpg",
     link: "https://behance.net",
   },
   {
     id: "2",
-    title: "Beatrice Cortese",
+    title: "BEATRICE CORTESE",
     tag: "02 / ECOMMERCE & BRAND",
     category: "SELECTED CASE 02",
     desc: "A tailored digital cellar experience designed for an esteemed Italian artisan winemaking house. Rich atmospheric storytelling, interactive vintage archives, and award-winning minimalist elegance.",
-    disciplines: "CREATIVE DIRECTION, THREE.JS, ECOMMERCE",
+    disciplines: "UX/UI DESIGN, DEVELOPMENT",
     awards: "WEBSITE OF THE DAY • 06 AWARDS",
     img: "/images/case-2.jpg",
     link: "https://behance.net",
   },
   {
     id: "3",
-    title: "Viceversa",
+    title: "VICEVERSA",
     tag: "03 / FINTECH PLATFORM",
     category: "SELECTED CASE 03",
     desc: "Tailored user-friendly and high-contrast UX/UI architecture for Viceversa's revenue-based financing platform. Empowering fast-growing digital businesses with clear data insights.",
-    disciplines: "PRODUCT DESIGN, DESIGN SYSTEM, FRONTEND",
+    disciplines: "UX/UI DESIGN",
     awards: "FINTECH LEADER 2024",
     img: "/images/case-3.jpg",
     link: "https://behance.net",
   },
   {
     id: "4",
-    title: "Codeway Tech",
+    title: "CODEWAY CH",
     tag: "04 / CREATIVE TECH",
     category: "SELECTED CASE 04",
     desc: "A dynamic brutalist website blending algorithmic software engineering with interactive 3D mechanics and WebGL canvas interactions to elevate their global brand identity.",
-    disciplines: "THREE.JS, FULL-STACK DEVELOPMENT",
+    disciplines: "UX/UI DESIGN, DEVELOPMENT",
     awards: "FWA OF THE DAY • SPECIAL KUDOS",
     img: "/images/case-4.jpg",
     link: "https://behance.net",
   },
   {
     id: "5",
-    title: "Miranda Biondi",
+    title: "MIRANDA",
     tag: "05 / VISUAL IDENTITY",
     category: "SELECTED CASE 05",
     desc: "A catchy, high-impact creative portfolio spotlighting prowess in graphic design, experimental typography, and geometric poster systems with fluid interactive reveals.",
-    disciplines: "UX/UI DESIGN, MOTION DEVELOPMENT",
+    disciplines: "UX/UI DESIGN",
     awards: "MOBILE EXCELLENCE • CSSDA",
     img: "/images/case-5.jpg",
     link: "https://behance.net",
+  },
+];
+
+// Asymmetric grid positioning configs matching editorial reference layout
+const CASE_LAYOUTS = [
+  // 1. Barbara Scerbo: Title Left (cols 1-5), Image Right (cols 5-11)
+  {
+    textWrapper: "lg:col-span-5 xl:col-span-4 lg:col-start-1 xl:col-start-1",
+    imgWrapper: "lg:col-span-6 xl:col-span-6 lg:col-start-6 xl:col-start-5",
+    textOrder: "order-2 lg:order-1",
+    imgOrder: "order-1 lg:order-2",
+  },
+  // 2. Beatrice Cortese: Image Left (cols 2-6), Title Right (cols 7-11)
+  {
+    textWrapper: "lg:col-span-5 xl:col-span-5 lg:col-start-7 xl:col-start-7",
+    imgWrapper: "lg:col-span-5 xl:col-span-5 lg:col-start-2 xl:col-start-2",
+    textOrder: "order-2 lg:order-2",
+    imgOrder: "order-1 lg:order-1",
+  },
+  // 3. Viceversa: Image Center (cols 5-9), Title Right (cols 9-12)
+  {
+    textWrapper: "lg:col-span-4 xl:col-span-3 lg:col-start-10 xl:col-start-9",
+    imgWrapper: "lg:col-span-5 xl:col-span-4 lg:col-start-5 xl:col-start-5",
+    textOrder: "order-2 lg:order-2",
+    imgOrder: "order-1 lg:order-1",
+  },
+  // 4. Codeway CH: Title Center (cols 5-7), Image Right (cols 8-12)
+  {
+    textWrapper: "lg:col-span-4 xl:col-span-3 lg:col-start-5 xl:col-start-5",
+    imgWrapper: "lg:col-span-5 xl:col-span-5 lg:col-start-8 xl:col-start-8",
+    textOrder: "order-2 lg:order-1",
+    imgOrder: "order-1 lg:order-2",
+  },
+  // 5. Miranda: Title Left (cols 2-4), Image Center-Right (cols 5-10)
+  {
+    textWrapper: "lg:col-span-3 xl:col-span-3 lg:col-start-2 xl:col-start-2",
+    imgWrapper: "lg:col-span-6 xl:col-span-6 lg:col-start-5 xl:col-start-5",
+    textOrder: "order-2 lg:order-1",
+    imgOrder: "order-1 lg:order-2",
   },
 ];
 
@@ -103,82 +142,51 @@ const Cases: React.FC<CasesProps> = ({ onSelectCase }) => {
     <section
       ref={containerRef}
       id="cases"
-      className="py-24 sm:py-36 px-6 sm:px-10 lg:px-16 max-w-[1720px] mx-auto border-t border-white/10"
+      className="py-24 sm:py-36 pl-[15%] max-w-[1720px] mx-auto"
     >
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-16 sm:mb-24 gap-6">
-        <div>
-          <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-[#F3DBC7] uppercase mb-3">
-            <div className="star-icon w-4 h-4 animate-spin-slow">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
-              </svg>
-            </div>
-            <span>02 / PORTFOLIO</span>
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-20 sm:mb-32 gap-6">
+        <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-[#F3DBC7] uppercase mb-3">
+          <div className="star-icon w-4 h-4 animate-spin-slow">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0L14.5 9.5L24 12L14.5 14.5L12 24L9.5 14.5L0 12L9.5 9.5L12 0Z" />
+            </svg>
           </div>
-          <h2 className="font-display text-4xl sm:text-7xl font-extrabold uppercase tracking-tight">
-            Selected Cases
+          <h2 className="font-sans text-[2rem] sm:text-[2rem] font-medium tracking-tight">
+            SELECTED CASES
           </h2>
-        </div>
-        <div className="font-mono text-xs text-white/50 uppercase tracking-widest">
-          <span>[ 05 FEATURED COMMISSIONS ]</span>
         </div>
       </div>
 
-      {/* Asymmetric Grid Container */}
-      <div className="space-y-24 lg:space-y-36">
+      {/* Asymmetric Editorial Grid Container */}
+      <div className="space-y-25 sm:space-y-30 lg:space-y-28">
         {CASES_DATA.map((item, index) => {
-          const isEven = index % 2 === 1;
+          const layout = CASE_LAYOUTS[index % CASE_LAYOUTS.length];
 
           return (
             <div
               key={item.id}
               onClick={() => onSelectCase(item)}
-              className="case-item grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center cursor-pointer group"
+              className="case-item grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center cursor-pointer group select-none"
             >
-              {/* Text Column */}
-              <div
-                className={`space-y-4 ${
-                  isEven
-                    ? "lg:col-span-5 order-2 lg:pl-8"
-                    : "lg:col-span-5 order-2 lg:order-1"
-                }`}
-              >
-                <span className="font-mono text-xs text-[#F3DBC7] tracking-widest uppercase">
-                  {item.tag}
-                </span>
-                <h3 className="font-display text-3xl sm:text-5xl font-bold uppercase tracking-tight group-hover:text-[#F3DBC7] transition-colors">
+              {/* Typography Block: Title + Subtitle */}
+              <div className={`${layout.textWrapper} ${layout.textOrder} space-y-2`}>
+                <h3 className="font-display font-black text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-[0.01em] uppercase leading-[0.88] text-white ">
                   {item.title}
                 </h3>
-                <p className="font-sans text-white/60 text-base sm:text-lg max-w-md">
-                  {item.desc}
+                <p className="font-sans font-medium text-[16px] tracking-widest text-white/70 uppercase">
+                  {item.disciplines}
                 </p>
-                <div className="pt-2 flex items-center gap-4 font-mono text-xs text-white/40 uppercase tracking-wider">
-                  <span>{item.disciplines.split(",")[0]}</span>
-                  <span>•</span>
-                  <span className="text-[#F3DBC7]">{item.awards.split("•")[0]}</span>
-                </div>
               </div>
 
-              {/* Image Column */}
-              <div
-                className={`overflow-hidden rounded-xl border border-white/10 bg-white/5 ${
-                  isEven
-                    ? "lg:col-span-7 order-1"
-                    : "lg:col-span-7 order-1 lg:order-2"
-                }`}
-              >
-                <div className="overflow-hidden aspect-[16/10] relative">
+              {/* Clean Image Block */}
+              <div className={`${layout.imgWrapper} ${layout.imgOrder}`}>
+                <div className="overflow-hidden aspect-[16/8] relative bg-neutral-900 transition-transform duration-700 ease-out group-hover:scale-[0.96] origin-center">
                   <img
                     src={item.img}
                     alt={item.title}
-                    className="case-img w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 filter grayscale contrast-110 group-hover:grayscale-0"
+                    className="case-img w-full h-full object-cover filter grayscale contrast-110  group-hover:scale-110 transition-all duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-                  <div className="absolute bottom-4 right-4 bg-[#0a0a0a]/90 text-white font-mono text-xs uppercase px-4 py-2 rounded-full border border-white/20 flex items-center gap-2 group-hover:bg-white group-hover:text-black transition-colors">
-                    <span>Explore Case</span>
-                    <span>↗</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -190,3 +198,5 @@ const Cases: React.FC<CasesProps> = ({ onSelectCase }) => {
 };
 
 export default Cases;
+
+// group-hover:grayscale-0

@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Rounded Pill Contact Button */}
-          <div className="pt-2 w-full lg:w-auto flex justify-start lg:justify-end">
+          {/* <div className="pt-2 w-full lg:w-auto flex justify-start lg:justify-end">
             <a
               href="#footer"
               className="magnetic-btn group relative inline-flex items-center justify-center px-8 py-3.5 rounded-full border border-white/60 hover:border-white bg-[#0a0a0a]/60 backdrop-blur-md text-[#f5f5f5] overflow-hidden transition-all duration-300 font-sans text-xs sm:text-sm uppercase tracking-widest font-bold shadow-xl"
@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
                 </div>
               </div>
             </a>
-          </div>
+          </div> */}
         </div>
 
       </div>

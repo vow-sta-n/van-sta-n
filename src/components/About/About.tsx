@@ -1,8 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { USDLoader } from "three/examples/jsm/loaders/USDLoader.js";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 
 const About: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [loadingProgress, setLoadingProgress] = useState<number | null>(0);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -13,32 +16,53 @@ const About: React.FC = () => {
     const camera = new THREE.PerspectiveCamera(
       45,
       canvas.clientWidth / canvas.clientHeight,
-      0.1,
+      0.05,
       100
     );
-    camera.position.set(0, 0, 4.5);
+    camera.position.set(0, 0, 2.8);
 
     const renderer = new THREE.WebGLRenderer({
       canvas,
       antialias: true,
       alpha: true,
+      powerPreference: "high-performance",
     });
     renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setClearColor(0x000000, 0);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
 
-    // Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    // OrbitControls: Disabled zoom, strictly horizontal rotation constrained to fixed left/right angles
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    controls.rotateSpeed = 0.7;
+
+    // Lock vertical rotation (keep upright on horizon)
+    controls.minPolarAngle = Math.PI / 2;
+    controls.maxPolarAngle = Math.PI / 2;
+
+    // Restrict horizontal rotation to a fixed bounded angle range left and right
+    controls.minAzimuthAngle = -Math.PI / 3; // ~60° to the left
+    controls.maxAzimuthAngle = Math.PI / 3;  // ~60° to the right
+    controls.target.set(0, 0, 0);
+
+    // Lighting setup for classical museum sculpture
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    const keyLight = new THREE.DirectionalLight(0xf3dbc7, 2.2);
+    const keyLight = new THREE.DirectionalLight(0xf3dbc7, 2.8);
     keyLight.position.set(4, 5, 4);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0x88bbff, 1.2);
+    const fillLight = new THREE.DirectionalLight(0x88bbff, 1.4);
     fillLight.position.set(-4, -2, 2);
     scene.add(fillLight);
 
-    const rimLight = new THREE.PointLight(0xffffff, 1.8, 10);
+    const rimLight = new THREE.PointLight(0xffffff, 2.0, 10);
     rimLight.position.set(0, 4, -3);
     scene.add(rimLight);
 
@@ -46,107 +70,65 @@ const About: React.FC = () => {
     const sculptureGroup = new THREE.Group();
     scene.add(sculptureGroup);
 
-    // Materials
-    const headMaterial = new THREE.MeshStandardMaterial({
-      color: 0xdedede,
-      roughness: 0.35,
-      metalness: 0.15,
-      flatShading: true,
-    });
+    // Load Julius Caesar USDZ model
+    const loader = new USDLoader();
+    loader.load(
+      "/models/Caio_Giulio_Cesare.usdz",
+      (model) => {
+        sculptureGroup.add(model);
+        sculptureGroup.updateMatrixWorld(true);
 
-    const wireframeMaterial = new THREE.MeshBasicMaterial({
-      color: 0xf3dbc7,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.25,
-    });
+        // Calculate accurate world bounding box
+        const box = new THREE.Box3().setFromObject(sculptureGroup);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
 
-    // 1. Head Cranium (Icosahedron)
-    const headGeo = new THREE.IcosahedronGeometry(1.05, 2);
-    const headMesh = new THREE.Mesh(headGeo, headMaterial);
-    const headWire = new THREE.Mesh(headGeo, wireframeMaterial);
-    sculptureGroup.add(headMesh);
-    sculptureGroup.add(headWire);
+        // Center model geometry at origin
+        model.position.sub(center);
 
-    // 2. Classical Facial Feature Planes (Nose / Brow / Jaw)
-    const noseGeo = new THREE.ConeGeometry(0.22, 0.6, 4);
-    noseGeo.rotateX(Math.PI / 2);
-    const noseMesh = new THREE.Mesh(noseGeo, headMaterial);
-    noseMesh.position.set(0, -0.05, 0.95);
-    sculptureGroup.add(noseMesh);
+        // Scale the parent group so USDZ internal metersPerUnit scale is preserved
+        const maxDim = Math.max(size.x, size.y, size.z);
+        if (maxDim > 0) {
+          const targetHeight = 1.95; // Compact, perfectly scaled size
+          const scaleFactor = targetHeight / maxDim;
+          sculptureGroup.scale.setScalar(scaleFactor);
+        }
 
-    // 3. Jaw / Chin Block
-    const jawGeo = new THREE.BoxGeometry(0.8, 0.45, 0.7);
-    const jawMesh = new THREE.Mesh(jawGeo, headMaterial);
-    jawMesh.position.set(0, -0.75, 0.35);
-    sculptureGroup.add(jawMesh);
+        // Apply high quality material enhancements
+        model.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            const mesh = child as THREE.Mesh;
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+            if (mesh.material) {
+              const mat = mesh.material as THREE.MeshStandardMaterial;
+              mat.roughness = 0.45;
+              mat.metalness = 0.1;
+              mat.needsUpdate = true;
+            }
+          }
+        });
 
-    // 4. Neck & Pedestal Base
-    const neckGeo = new THREE.CylinderGeometry(0.35, 0.5, 0.8, 8);
-    const neckMesh = new THREE.Mesh(neckGeo, headMaterial);
-    neckMesh.position.set(0, -1.2, 0);
-    sculptureGroup.add(neckMesh);
-
-    const baseGeo = new THREE.CylinderGeometry(0.9, 1.1, 0.35, 12);
-    const baseMesh = new THREE.Mesh(baseGeo, headMaterial);
-    baseMesh.position.set(0, -1.7, 0);
-    sculptureGroup.add(baseMesh);
-
-    // 5. Crown Hair Ring
-    const ringGeo = new THREE.TorusGeometry(1.15, 0.15, 6, 16);
-    ringGeo.rotateX(Math.PI / 2.3);
-    const ringMesh = new THREE.Mesh(ringGeo, headMaterial);
-    ringMesh.position.set(0, 0.5, -0.1);
-    sculptureGroup.add(ringMesh);
-
-    // Interactive Mouse Orbit & Parallax
-    let targetRotationX = 0;
-    let targetRotationY = 0;
-    let isDragging = false;
-    let prevMouseX = 0;
-    let prevMouseY = 0;
-
-    const onMouseMove = (e: MouseEvent) => {
-      const mouseNormX = (e.clientX / window.innerWidth) * 2 - 1;
-      const mouseNormY = -(e.clientY / window.innerHeight) * 2 + 1;
-
-      if (!isDragging) {
-        targetRotationY = mouseNormX * 0.75;
-        targetRotationX = -mouseNormY * 0.45;
+        setLoadingProgress(null);
+      },
+      (xhr) => {
+        if (xhr.total > 0) {
+          const percent = Math.round((xhr.loaded / xhr.total) * 100);
+          setLoadingProgress(percent);
+        }
+      },
+      (error) => {
+        console.error("Error loading Caesar 3D USDZ model:", error);
+        setLoadingProgress(null);
       }
-    };
-
-    const onMouseDown = (e: MouseEvent) => {
-      isDragging = true;
-      prevMouseX = e.clientX;
-      prevMouseY = e.clientY;
-    };
-
-    const onMouseUp = () => {
-      isDragging = false;
-    };
-
-    const onDragMove = (e: MouseEvent) => {
-      if (isDragging) {
-        const deltaX = e.clientX - prevMouseX;
-        const deltaY = e.clientY - prevMouseY;
-        targetRotationY += deltaX * 0.01;
-        targetRotationX += deltaY * 0.01;
-        prevMouseX = e.clientX;
-        prevMouseY = e.clientY;
-      }
-    };
-
-    window.addEventListener("mousemove", onMouseMove);
-    canvas.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("mousemove", onDragMove);
+    );
 
     // Resize Handler
     const onResize = () => {
       if (!canvas) return;
       const width = canvas.clientWidth;
       const height = canvas.clientHeight;
+      if (width === 0 || height === 0) return;
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
@@ -155,26 +137,17 @@ const About: React.FC = () => {
 
     // Animation Loop
     let animId: number;
-    const clock = new THREE.Clock();
 
     const animate = () => {
-      const elapsedTime = clock.getElapsedTime();
-
-      sculptureGroup.rotation.y += (targetRotationY - sculptureGroup.rotation.y) * 0.06;
-      sculptureGroup.rotation.x += (targetRotationX - sculptureGroup.rotation.x) * 0.06;
-      sculptureGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.05 + 0.3;
-
+      controls.update();
       renderer.render(scene, camera);
       animId = requestAnimationFrame(animate);
     };
     animate();
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      canvas.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mouseup", onMouseUp);
-      window.removeEventListener("mousemove", onDragMove);
       window.removeEventListener("resize", onResize);
+      controls.dispose();
       cancelAnimationFrame(animId);
       renderer.dispose();
     };
@@ -183,62 +156,55 @@ const About: React.FC = () => {
   return (
     <section
       id="intro"
-      className="py-24 sm:py-36 px-6 sm:px-10 lg:px-16 max-w-[1720px] mx-auto border-t border-white/10"
+      className="py-32 sm:py-48 min-h-[90vh] flex items-center px-6 sm:px-10 lg:px-16 max-w-[1720px] mx-auto"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         {/* Left Column: Copy & Narrative */}
-        <div className="lg:col-span-7 space-y-8">
-          <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-[#F3DBC7] uppercase">
-            <span>01 / ABOUT</span>
-            <span className="h-[1px] w-12 bg-[#F3DBC7]/40" />
+        <div className="lg:col-span-7 space-y-10">
+          {/* Header: Tusker Grotesk Title with Migra Sub-name */}
+          <div className="inline-block">
+            <h2 className="font-display font-black text-5xl sm:text-7xl lg:text-8xl tracking-[0.03em] uppercase leading-none text-white">
+              HELLO. I AM VAN STAN
+            </h2>
+            <div className="text-right -mt-2">
+              <span className="font-serif text-base sm:text-lg text-[#F3DBC7] inline-block tracking-wide ">
+                Yu
+              </span>
+              <span className="font-serif text-base sm:text-lg text-white inline-block tracking-wide">
+                van Sta
+              </span>
+              <span className="font-serif text-base sm:text-lg text-[#F3DBC7] inline-block tracking-wide ">
+                rsu
+              </span>
+              <span className="font-serif text-base sm:text-lg text-white inline-block tracking-wide">
+                n
+              </span>
+            </div>
           </div>
 
-          <h2 className="font-display text-4xl sm:text-6xl font-bold uppercase tracking-tight leading-tight">
-            Hello. I am Van Stan
-            <span className="inline-block text-sm font-mono tracking-widest text-[#0a0a0a] bg-[#F3DBC7] px-3 py-1 rounded ml-3 align-middle font-normal">
-              CREATIVE DIRECTOR
-            </span>
-          </h2>
-
-          <div className="space-y-6 text-white/70 text-lg sm:text-xl leading-relaxed font-sans">
-            <p>
-              I use deep engineering discipline and art direction to create bespoke digital products, immersive web applications, and brutalist digital identities.
+          {/* Body Paragraph: Neue Montreal Uppercase Bold Editorial with Indent */}
+          <div className="font-sans font-medium text-lg sm:text-2xl lg:text-[1.9rem] leading-[1.32] text-white uppercase tracking-[0.01em]">
+            <p className="indent-16 sm:indent-28 lg:indent-36">
+              I USE MY PASSION AND SKILLS TO CREATE DIGITAL PRODUCTS AND EXPERIENCES. NATIONAL AND INTERNATIONAL CUSTOMERS RELY ON ME FOR DESIGN, IMPLEMENTATION, AND MANAGEMENT OF THEIR DIGITAL PRODUCTS. AS AN INDEPENDENT, I WORK ALSO WITH WEB AGENCIES, COMPANIES, STARTUPS AND INDIVIDUALS TO CREATE A BLUEPRINT FOR THE DIGITAL BUSINESS. ADVISOR AND PARTNER OF SOME DIGITAL AND FINTECH STARTUPS. ALSO, JUDGE AT CSSDA AND THE WEBBY.
             </p>
-            <p>
-              Forward-thinking brands, design agencies, and innovative startups rely on my expertise for full-cycle creative development—from architecture to pixel-perfect motion choreography.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-white/10 font-mono text-xs uppercase tracking-wider text-white/60">
-            <div>
-              <span className="block text-white font-bold text-sm mb-1">LOCATION</span>
-              <span>Global / Remote</span>
-            </div>
-            <div>
-              <span className="block text-white font-bold text-sm mb-1">DISCIPLINES</span>
-              <span>UX/UI • 3D • Motion</span>
-            </div>
-            <div>
-              <span className="block text-white font-bold text-sm mb-1">RECOGNITIONS</span>
-              <span>Awwwards • CSSDA • FWA</span>
-            </div>
           </div>
         </div>
 
         {/* Right Column: Interactive 3D WebGL Canvas & Doodle */}
-        <div className="lg:col-span-5 relative flex flex-col items-center">
-          {/* 3D Canvas Container */}
-          <div className="w-full aspect-square max-w-[500px] relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-sm overflow-hidden group shadow-2xl">
+        <div className="lg:col-span-5 relative flex flex-col items-center justify-center">
+          {/* 3D Canvas Container - Portrait Rectangle */}
+          <div className="w-full aspect-[3/4] max-w-[480px] relative group flex items-center justify-center">
             <canvas ref={canvasRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
-            {/* Subtle Canvas Overlay Gradients */}
-            <div className="absolute inset-0 pointer-events-none bg-radial-gradient from-transparent via-transparent to-[#0a0a0a]/60" />
-
-            {/* Interactive Hint */}
-            <div className="absolute bottom-4 left-4 font-mono text-[10px] text-white/40 uppercase tracking-widest flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F3DBC7] animate-ping" />
-              <span>Interactive 3D • Drag to orbit</span>
-            </div>
+            {/* Elegant Loading State */}
+            {loadingProgress !== null && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-transparent backdrop-blur-none pointer-events-none transition-opacity duration-500">
+                <div className="w-8 h-8 rounded-full border-2 border-[#F3DBC7]/20 border-t-[#F3DBC7] animate-spin" />
+                <span className="font-mono text-xs text-[#F3DBC7] uppercase tracking-widest">
+                  Loading 3D Sculpture {loadingProgress > 0 ? `${loadingProgress}%` : ""}
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Hand-drawn SVG Doodle & Arrow */}

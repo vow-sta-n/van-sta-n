@@ -38,7 +38,7 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = ({ isOpen, onClose }) => {
 
             <div>
               <span className="block text-white font-bold mb-1">INTERACTIONS & PHYSICS:</span>
-              <p>GSAP ScrollTrigger, Lenis Smooth Inertia, SplitType</p>
+              <p>GSAP ScrollTrigger, SplitType</p>
             </div>
 
             <div>
