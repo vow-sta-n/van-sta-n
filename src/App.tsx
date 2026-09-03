@@ -10,6 +10,7 @@ import Featured from "./components/Featured/Featured";
 import Footer from "./components/Footer/Footer";
 import ProjectsDrawer from "./components/Drawers/ProjectsDrawer";
 import CreditsDrawer from "./components/Drawers/CreditsDrawer";
+import LoadingBanner from "./components/LoadingBanner/LoadingBanner";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,45 +37,67 @@ const App: React.FC = () => {
     // Parallax motion & dynamic background transitions with native scroll
     const ctx = gsap.context(() => {
       if (bgImageRef.current) {
-        gsap.to(bgImageRef.current, {
-          y: "-50vh",
-          ease: "none",
-          scrollTrigger: {
-            trigger: "#hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
-        });
+        gsap.fromTo(
+          bgImageRef.current,
+          { y: "0vh" },
+          {
+            y: "-50vh",
+            ease: "none",
+            scrollTrigger: {
+              trigger: "#hero",
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
       }
 
       if (darkOverlayRef.current) {
-        // Slowly change background to dark grey ONLY after background image finishes scrolling
-        gsap.to(darkOverlayRef.current, {
-          opacity: 1,
-          ease: "power1.inOut",
-          scrollTrigger: {
-            trigger: "#hero",
-            start: "bottom top",
-            end: "+=150px",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
+        const overlay = darkOverlayRef.current;
+        const ease = gsap.parseEase("power1.inOut");
+
+        let heroST: ScrollTrigger;
+        let footerST: ScrollTrigger;
+
+        const updateOverlayOpacity = () => {
+          const heroProgress = heroST ? heroST.progress : 0;
+          const footerProgress = footerST ? footerST.progress : 0;
+          const easedHero = ease(heroProgress);
+          const easedFooter = ease(footerProgress);
+          // Hero fades overlay in (0 -> 1), footer fades overlay out (1 -> 0)
+          const opacity = Math.max(0, Math.min(1, easedHero * (1 - easedFooter)));
+          overlay.style.opacity = opacity.toFixed(4);
+        };
+
+        // Hero exit transition: slowly change background to dark grey after hero scrolls
+        heroST = ScrollTrigger.create({
+          trigger: "#hero",
+          start: "bottom top",
+          end: "+=150px",
+          onUpdate: updateOverlayOpacity,
+          onEnter: updateOverlayOpacity,
+          onLeave: updateOverlayOpacity,
+          onEnterBack: updateOverlayOpacity,
+          onLeaveBack: updateOverlayOpacity,
+          onRefresh: updateOverlayOpacity,
         });
 
-        // Slowly change background from dark grey back to transparent when Footer enters viewport
-        gsap.to(darkOverlayRef.current, {
-          opacity: 0,
-          ease: "power1.inOut",
-          scrollTrigger: {
-            trigger: "#footer",
-            start: "top 85%",
-            end: "top 25%",
-            scrub: true,
-            invalidateOnRefresh: true,
-          },
+        // Footer enter transition: slowly change background back to transparent when Footer enters viewport
+        footerST = ScrollTrigger.create({
+          trigger: "#footer",
+          start: "top 85%",
+          end: "top 25%",
+          onUpdate: updateOverlayOpacity,
+          onEnter: updateOverlayOpacity,
+          onLeave: updateOverlayOpacity,
+          onEnterBack: updateOverlayOpacity,
+          onLeaveBack: updateOverlayOpacity,
+          onRefresh: updateOverlayOpacity,
         });
+
+        // Synchronize initial state
+        updateOverlayOpacity();
       }
     });
 
@@ -85,6 +108,9 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-background text-[#f5f5f5] min-h-screen selection:bg-accent selection:text-background relative">
+      {/* SVG Loading Banner Overlay with Centered Inverted Triangle Reveal */}
+      <LoadingBanner />
+
       {/* Global Fixed Renaissance Fresco Background Under Entire Site with Parallax Motion */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <img
