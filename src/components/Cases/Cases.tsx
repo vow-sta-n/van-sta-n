@@ -22,7 +22,7 @@ export const CASES_DATA: CaseItemData[] = [
     desc: "A bespoke digital showcase engineered for high-fashion photography and avant-garde art direction. Featuring custom typography choreography, smooth kinetic gallery transitions, and brutalist framing.",
     disciplines: "UX/UI DESIGN, DEVELOPMENT",
     awards: "06 HONORS & RECOGNITIONS",
-    img: "/images/case-1.jpg",
+    img: `${import.meta.env.BASE_URL}images/case-1.jpg`,
     link: "https://behance.net",
   },
   {
@@ -33,7 +33,7 @@ export const CASES_DATA: CaseItemData[] = [
     desc: "A tailored digital cellar experience designed for an esteemed Italian artisan winemaking house. Rich atmospheric storytelling, interactive vintage archives, and award-winning minimalist elegance.",
     disciplines: "UX/UI DESIGN, DEVELOPMENT",
     awards: "WEBSITE OF THE DAY • 06 AWARDS",
-    img: "/images/case-2.jpg",
+    img: `${import.meta.env.BASE_URL}images/case-2.jpg`,
     link: "https://behance.net",
   },
   {
@@ -44,7 +44,7 @@ export const CASES_DATA: CaseItemData[] = [
     desc: "Tailored user-friendly and high-contrast UX/UI architecture for Viceversa's revenue-based financing platform. Empowering fast-growing digital businesses with clear data insights.",
     disciplines: "UX/UI DESIGN",
     awards: "FINTECH LEADER 2024",
-    img: "/images/case-3.jpg",
+    img: `${import.meta.env.BASE_URL}images/case-3.jpg`,
     link: "https://behance.net",
   },
   {
@@ -55,7 +55,7 @@ export const CASES_DATA: CaseItemData[] = [
     desc: "A dynamic brutalist website blending algorithmic software engineering with interactive 3D mechanics and WebGL canvas interactions to elevate their global brand identity.",
     disciplines: "UX/UI DESIGN, DEVELOPMENT",
     awards: "FWA OF THE DAY • SPECIAL KUDOS",
-    img: "/images/case-4.jpg",
+    img: `${import.meta.env.BASE_URL}images/case-4.jpg`,
     link: "https://behance.net",
   },
   {
@@ -66,7 +66,7 @@ export const CASES_DATA: CaseItemData[] = [
     desc: "A catchy, high-impact creative portfolio spotlighting prowess in graphic design, experimental typography, and geometric poster systems with fluid interactive reveals.",
     disciplines: "UX/UI DESIGN",
     awards: "MOBILE EXCELLENCE • CSSDA",
-    img: "/images/case-5.jpg",
+    img: `${import.meta.env.BASE_URL}images/case-5.jpg`,
     link: "https://behance.net",
   },
 ];

@@ -73,7 +73,7 @@ const About: React.FC = () => {
     // Load Julius Caesar USDZ model
     const loader = new USDLoader();
     loader.load(
-      "/models/Caio_Giulio_Cesare.usdz",
+      `${import.meta.env.BASE_URL}models/Caio_Giulio_Cesare.usdz`,
       (model) => {
         sculptureGroup.add(model);
         sculptureGroup.updateMatrixWorld(true);

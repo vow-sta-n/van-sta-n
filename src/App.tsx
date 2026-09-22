@@ -115,7 +115,7 @@ const App: React.FC = () => {
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <img
           ref={bgImageRef}
-          src="/images/hero-renaissance.jpg"
+          src={`${import.meta.env.BASE_URL}images/hero-renaissance.jpg`}
           alt="Renaissance artwork background"
           className="w-full h-[155vh] max-w-none object-cover object-top filter brightness-[0.75] contrast-[1.05] will-change-transform"
         />
