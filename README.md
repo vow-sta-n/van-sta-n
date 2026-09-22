@@ -4,7 +4,7 @@ Welcome to my personal portfolio repository!
 
 I built this website to showcase my work, creative direction, and design engineering projects. I’ve made this project completely **open-source** so that developers, designers, and creators can freely explore the code, inspect the interactive WebGL & animation mechanics, and draw inspiration from the design system.
 
-🌐 **Live Demo:** [https://vow-sta-n.github.io/van-stan-folio/](https://vow-sta-n.github.io/van-sta-n/)
+🌐 **Live Demo:** [https://vow-sta-n.github.io/van-sta-n/](https://vow-sta-n.github.io/van-sta-n/)
 
 ---
 
@@ -49,8 +49,8 @@ Make sure you have [Node.js](https://nodejs.org/) installed (version 18 or highe
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/vow-sta-n/van-stan-folio.git
-   cd van-stan-folio
+   git clone https://github.com/vow-sta-n/van-sta-n.git
+   cd van-sta-n
    ```
 
 2. **Install dependencies:**
