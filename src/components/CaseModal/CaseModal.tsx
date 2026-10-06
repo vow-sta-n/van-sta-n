@@ -77,14 +77,26 @@ const CaseModal: React.FC<CaseModalProps> = ({ activeCase, onClose }) => {
                   <span className="text-[#F3DBC7]">{activeCase.awards}</span>
                 </div>
               </div>
-              <a
-                href={activeCase.link}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center w-full py-4 rounded-full bg-white text-black font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#F3DBC7] transition-colors shadow-lg"
-              >
-                VIEW CASE ON BEHANCE ↗
-              </a>
+              <div className="flex flex-col gap-3 pt-2">
+                <a
+                  href={activeCase.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center w-full py-4 rounded-full bg-white text-black font-mono text-xs uppercase tracking-widest font-bold hover:bg-[#F3DBC7] transition-colors shadow-lg"
+                >
+                  {activeCase.linkText || "VIEW PROJECT ↗"}
+                </a>
+                {activeCase.secondaryLink && (
+                  <a
+                    href={activeCase.secondaryLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center w-full py-3.5 rounded-full border border-white/20 text-white font-mono text-xs uppercase tracking-widest font-semibold hover:border-[#F3DBC7] hover:text-[#F3DBC7] transition-colors"
+                  >
+                    {activeCase.secondaryLinkText || "SECONDARY SOURCE ↗"}
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>

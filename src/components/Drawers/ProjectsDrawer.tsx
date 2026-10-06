@@ -6,16 +6,15 @@ interface ProjectsDrawerProps {
 }
 
 const ARCHIVE_PROJECTS = [
-  { name: "Beatrice Cortese Vini", role: "Design, Dev", year: "2024" },
-  { name: "Barbara Scerbo Studio", role: "Design, Dev", year: "2024" },
-  { name: "Viceversa Financing", role: "Product Design", year: "2023" },
-  { name: "Codeway Tech", role: "Three.js, Dev", year: "2023" },
-  { name: "Miranda Biondi", role: "Identity, Dev", year: "2022" },
-  { name: "PwC Alumni Digital Platform", role: "UX/UI, Dev", year: "2022" },
-  { name: "Villa di Geggiano Winery", role: "Creative Dev", year: "2021" },
-  { name: "WattEV Mobility", role: "Frontend", year: "2021" },
-  { name: "SoundFit Audio App", role: "Design, Architecture", year: "2021" },
-  { name: "Preludio Music Platform", role: "Design & Dev", year: "2020" },
+  { name: "Alga: HRMS & Payroll", role: "Flutter Architecture", year: "2024-2026" },
+  { name: "Chloro IoT Configurator", role: "Flutter, BLE, IoT", year: "2024" },
+  { name: "Chloro X: Factory MES", role: "MES Interface, HCI", year: "2024" },
+  { name: "SnapTag GPS Map Camera", role: "Flutter, Camera2, GIS", year: "2026" },
+  { name: "PDF Hawk Document Engine", role: "Flutter, PDF Engine", year: "2026" },
+  { name: "Flutter Da Vinci Figma Plugin", role: "Figma API, TypeScript", year: "2026" },
+  { name: "EMA Distress Assessment", role: "Flutter, GCP Functions", year: "2026" },
+  { name: "PSYRA Web Platform", role: "React, Three.js", year: "2024" },
+  { name: "Independent E-Commerce PoC", role: "Node.js, SQL, AWS", year: "2021-2023" },
 ];
 
 const ProjectsDrawer: React.FC<ProjectsDrawerProps> = ({ isOpen, onClose }) => {

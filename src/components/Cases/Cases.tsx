@@ -11,102 +11,135 @@ export interface CaseItemData {
   awards: string;
   img: string;
   link: string;
+  linkText?: string;
+  secondaryLink?: string;
+  secondaryLinkText?: string;
 }
 
 export const CASES_DATA: CaseItemData[] = [
   {
     id: "1",
-    title: "BARBARA SCERBO",
-    tag: "01 / ART DIRECTION & DEV",
+    title: "ALGA",
+    tag: "01 / ENTERPRISE HRMS & PAYROLL",
     category: "SELECTED CASE 01",
-    desc: "A bespoke digital showcase engineered for high-fashion photography and avant-garde art direction. Featuring custom typography choreography, smooth kinetic gallery transitions, and brutalist framing.",
-    disciplines: "UX/UI DESIGN, DEVELOPMENT",
-    awards: "06 HONORS & RECOGNITIONS",
-    img: `${import.meta.env.BASE_URL}images/case-1.jpg`,
-    link: "https://behance.net",
+    desc: "End-to-end mobile front-end architecture for OrbidX's enterprise B2B HRMS and payroll platform built with Flutter. Engineered biometric hardware telemetry, real-time geo-attendance tracking, punch-violation notifications, shift scheduling, and granular payroll reporting. Published on both Apple App Store and Google Play Store.",
+    disciplines: "FLUTTER, DART, REST APIS, BIOMETRICS",
+    awards: "APP STORE & PLAY STORE DEPLOYED",
+    img: `${import.meta.env.BASE_URL}images/case-alga.jpg`,
+    link: "https://apps.apple.com/us/app/alga/id6747277841",
+    linkText: "VIEW ON APP STORE ↗",
+    secondaryLink: "https://play.google.com/store/apps/details?id=com.orbidx.algas&hl=en_SG",
+    secondaryLinkText: "VIEW ON GOOGLE PLAY ↗",
   },
   {
     id: "2",
-    title: "BEATRICE CORTESE",
-    tag: "02 / ECOMMERCE & BRAND",
+    title: "CHLORO IOT",
+    tag: "02 / INDUSTRIAL IOT & BLE CONFIGURATOR",
     category: "SELECTED CASE 02",
-    desc: "A tailored digital cellar experience designed for an esteemed Italian artisan winemaking house. Rich atmospheric storytelling, interactive vintage archives, and award-winning minimalist elegance.",
-    disciplines: "UX/UI DESIGN, DEVELOPMENT",
-    awards: "WEBSITE OF THE DAY • 06 AWARDS",
-    img: `${import.meta.env.BASE_URL}images/case-2.jpg`,
-    link: "https://behance.net",
+    desc: "A Flutter-based industrial IoT hardware configurator and live telemetry dashboard. Pairs seamlessly with smart industrial devices over Bluetooth Low Energy (BLE) protocols, giving on-site technicians and engineers real-time parameter tuning, field diagnostics, and high-frequency sensor telemetry streaming.",
+    disciplines: "FLUTTER, BLE, EMBEDDED C/C++, IOT",
+    awards: "ORBIDX INDUSTRIAL PRODUCTION",
+    img: `${import.meta.env.BASE_URL}images/case-chloroiot.jpg`,
+    link: "https://play.google.com/store/apps/details?id=com.orbidx.chloroiot",
+    linkText: "VIEW ON GOOGLE PLAY ↗",
   },
   {
     id: "3",
-    title: "VICEVERSA",
-    tag: "03 / FINTECH PLATFORM",
+    title: "CHLORO X",
+    tag: "03 / MANUFACTURING EXECUTION SYSTEM",
     category: "SELECTED CASE 03",
-    desc: "Tailored user-friendly and high-contrast UX/UI architecture for Viceversa's revenue-based financing platform. Empowering fast-growing digital businesses with clear data insights.",
-    disciplines: "UX/UI DESIGN",
-    awards: "FINTECH LEADER 2024",
-    img: `${import.meta.env.BASE_URL}images/case-3.jpg`,
-    link: "https://behance.net",
+    desc: "Industrial Manufacturing Execution System (MES) and statistical analytics platform. Designed following an on-site manufacturing workflow study in Indonesia, transforming operator constraints into high-efficiency data-entry flows, real-time machine telemetry, and actionable factory KPI dashboards.",
+    disciplines: "FLUTTER, INDUSTRIAL MES, HCI, ANALYTICS",
+    awards: "INTERNATIONAL INDUSTRIAL DEPLOYMENT",
+    img: `${import.meta.env.BASE_URL}images/case-chlorox.jpg`,
+    link: "https://play.google.com/store/apps/details?id=com.orbidx.chlorox",
+    linkText: "VIEW ON GOOGLE PLAY ↗",
   },
   {
     id: "4",
-    title: "CODEWAY CH",
-    tag: "04 / CREATIVE TECH",
+    title: "SNAPTAG",
+    tag: "04 / SPATIAL CAMERA & GEOTAGGING",
     category: "SELECTED CASE 04",
-    desc: "A dynamic brutalist website blending algorithmic software engineering with interactive 3D mechanics and WebGL canvas interactions to elevate their global brand identity.",
-    disciplines: "UX/UI DESIGN, DEVELOPMENT",
-    awards: "FWA OF THE DAY • SPECIAL KUDOS",
-    img: `${import.meta.env.BASE_URL}images/case-4.jpg`,
-    link: "https://behance.net",
+    desc: "Open-source, high-precision GPS camera application that stamps real-time location, live satellite and street map tiles, altitude, weather metrics, and tamper-proof EXIF coordinates directly onto captured imagery. Engineered with Flutter, Camera2 API, and offline spatial caching for surveyors and researchers.",
+    disciplines: "FLUTTER, CAMERA2, GIS / MAPS, BLOC",
+    awards: "OPEN SOURCE • GPL V3 • GOOGLE PLAY",
+    img: `${import.meta.env.BASE_URL}images/case-snaptag.jpg`,
+    link: "https://play.google.com/store/apps/details?id=com.novaturients.snaptag&hl=en_IN",
+    linkText: "VIEW ON GOOGLE PLAY ↗",
+    secondaryLink: "https://github.com/vow-sta-n/snaptag",
+    secondaryLinkText: "VIEW ON GITHUB ↗",
   },
   {
     id: "5",
-    title: "MIRANDA",
-    tag: "05 / VISUAL IDENTITY",
+    title: "PDF HAWK",
+    tag: "05 / LOCAL-FIRST PDF WORKSPACE",
     category: "SELECTED CASE 05",
-    desc: "A catchy, high-impact creative portfolio spotlighting prowess in graphic design, experimental typography, and geometric poster systems with fluid interactive reveals.",
-    disciplines: "UX/UI DESIGN",
-    awards: "MOBILE EXCELLENCE • CSSDA",
-    img: `${import.meta.env.BASE_URL}images/case-5.jpg`,
-    link: "https://behance.net",
+    desc: "Lightweight (~10 MB), privacy-first cross-platform document utility built with Flutter. Delivers instant multi-page PDF rendering, rich Quill document authoring, page manipulation (split, merge, reorder), document scanning, and vector signatures—all executed 100% locally on-device without cloud telemetry.",
+    disciplines: "FLUTTER, DART, PDF RENDERING, OFFLINE-FIRST",
+    awards: "POLYFORM NONCOMMERCIAL • OPEN SOURCE",
+    img: `${import.meta.env.BASE_URL}images/case-pdfhawk.jpg`,
+    link: "https://github.com/vow-sta-n/pdf-hawk",
+    linkText: "VIEW ON GITHUB ↗",
+  },
+  {
+    id: "6",
+    title: "FLUTTER DA VINCI",
+    tag: "06 / FIGMA PLUGIN & CODE ENGINE",
+    category: "SELECTED CASE 06",
+    desc: "A Figma Community developer tool that parses vector paths, complex bezier curves, and auto-layouts directly into production-grade Dart CustomPainter code and Flutter widget trees with a single click, bridging vector graphic design and procedural Flutter rendering.",
+    disciplines: "FIGMA API, TYPESCRIPT, FLUTTER, DART",
+    awards: "FIGMA COMMUNITY • MIT LICENSE",
+    img: `${import.meta.env.BASE_URL}images/case-davinci.jpg`,
+    link: "https://www.figma.com/community/plugin/1563794532123885981/flutter-da-vinci-vector-to-custompainter",
+    linkText: "VIEW ON FIGMA COMMUNITY ↗",
+    secondaryLink: "https://github.com/vow-sta-n/Flutter-Da-Vinci",
+    secondaryLinkText: "VIEW ON GITHUB ↗",
   },
 ];
 
 // Asymmetric grid positioning configs matching editorial reference layout
 const CASE_LAYOUTS = [
-  // 1. Barbara Scerbo: Title Left (cols 1-5), Image Right (cols 5-11)
+  // 1. Alga: Title Left (cols 1-5), Image Right (cols 5-11)
   {
     textWrapper: "lg:col-span-5 xl:col-span-4 lg:col-start-1 xl:col-start-1",
     imgWrapper: "lg:col-span-6 xl:col-span-6 lg:col-start-6 xl:col-start-5",
     textOrder: "order-2 lg:order-1",
     imgOrder: "order-1 lg:order-2",
   },
-  // 2. Beatrice Cortese: Image Left (cols 2-6), Title Right (cols 7-11)
+  // 2. Chloro IoT: Image Left (cols 2-6), Title Right (cols 7-11)
   {
     textWrapper: "lg:col-span-5 xl:col-span-5 lg:col-start-7 xl:col-start-7",
     imgWrapper: "lg:col-span-5 xl:col-span-5 lg:col-start-2 xl:col-start-2",
     textOrder: "order-2 lg:order-2",
     imgOrder: "order-1 lg:order-1",
   },
-  // 3. Viceversa: Image Center (cols 5-9), Title Right (cols 9-12)
+  // 3. Chloro X: Image Center (cols 5-9), Title Right (cols 9-12)
   {
     textWrapper: "lg:col-span-4 xl:col-span-3 lg:col-start-10 xl:col-start-9",
     imgWrapper: "lg:col-span-5 xl:col-span-4 lg:col-start-5 xl:col-start-5",
     textOrder: "order-2 lg:order-2",
     imgOrder: "order-1 lg:order-1",
   },
-  // 4. Codeway CH: Title Center (cols 5-7), Image Right (cols 8-12)
+  // 4. SnapTag: Title Center (cols 5-7), Image Right (cols 8-12)
   {
     textWrapper: "lg:col-span-4 xl:col-span-3 lg:col-start-5 xl:col-start-5",
     imgWrapper: "lg:col-span-5 xl:col-span-5 lg:col-start-8 xl:col-start-8",
     textOrder: "order-2 lg:order-1",
     imgOrder: "order-1 lg:order-2",
   },
-  // 5. Miranda: Title Left (cols 2-4), Image Center-Right (cols 5-10)
+  // 5. PDF Hawk: Title Left (cols 2-4), Image Center-Right (cols 5-10)
   {
     textWrapper: "lg:col-span-3 xl:col-span-3 lg:col-start-2 xl:col-start-2",
     imgWrapper: "lg:col-span-6 xl:col-span-6 lg:col-start-5 xl:col-start-5",
     textOrder: "order-2 lg:order-1",
     imgOrder: "order-1 lg:order-2",
+  },
+  // 6. Flutter Da Vinci: Image Left (cols 1-6), Title Right (cols 7-12)
+  {
+    textWrapper: "lg:col-span-5 xl:col-span-5 lg:col-start-7 xl:col-start-7",
+    imgWrapper: "lg:col-span-6 xl:col-span-6 lg:col-start-1 xl:col-start-1",
+    textOrder: "order-2 lg:order-2",
+    imgOrder: "order-1 lg:order-1",
   },
 ];
 
