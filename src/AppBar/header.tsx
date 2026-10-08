@@ -69,7 +69,7 @@ const AppBar: React.FC<AppBarProps> = () => {
             </span>
           </a>
           <span className="hidden sm:inline-block font-sans font-medium text-xs sm:text-sm text-[#F8EEE4]/60 uppercase tracking-wider pl-4 sm:pl-6 ml-4 sm:ml-6 border-l border-white/20">
-            UX/UI Designer, Developer
+            Psychologist, Engineer
           </span>
         </div>
 
