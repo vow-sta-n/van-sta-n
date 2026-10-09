@@ -7,12 +7,11 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ onOpenCredits }) => {
   const servicePills = [
     { label: "UX/UI DESIGN", subject: "🎨 Looking for a Lead UX/UI Designer. Let's talk" },
-    { label: "FRONTEND ARCHITECTURE", subject: "👨‍💻 Looking for a Master of Frontend Architecture. Let's talk" },
-    { label: "THREE.JS & WEBGL", subject: "🌐 Interactive 3D & Three.js Project. Let's talk" },
+    { label: "System ARCHITECTURE", subject: "👨‍💻 Looking for a Master of System Architecture. Let's talk" },
     { label: "AI SOFTWARE & APPS", subject: "🤖 AI Software & Modern Apps. Let's talk" },
     { label: "DIGITAL CONSULTANT", subject: "💼 Digital Consulting & Advisory" },
     { label: "STARTUPS", subject: "🚀 Startup Product Build" },
-    { label: "PIZZA 🍕", subject: "🍕 I love pizza too! Give me five!", isAccent: true },
+    { label: "WANNA CREATE SOMETHING?", subject: "🤖 Wanna create something ? Let's talk", isAccent: true },
   ];
 
   return (
@@ -20,11 +19,11 @@ const Footer: React.FC<FooterProps> = ({ onOpenCredits }) => {
       <div className="space-y-16">
         {/* Headline */}
         <div className="space-y-4">
-          <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-[#F3DBC7] uppercase">
+          <div className="flex items-center gap-3 font-mono text-xs tracking-widest text-accent uppercase">
             <span>04 / CONNECT</span>
-            <span className="h-[1px] w-12 bg-[#F3DBC7]/40" />
+            <span className="h-px w-12 bg-accent/40" />
           </div>
-          <h2 className="font-display text-5xl sm:text-8xl lg:text-9xl font-black uppercase tracking-tight">
+          <h2 className="font-display text-5xl sm:text-8xl lg:text-9xl font-black uppercase ">
             Let's Connect
           </h2>
         </div>
@@ -39,11 +38,10 @@ const Footer: React.FC<FooterProps> = ({ onOpenCredits }) => {
               <a
                 key={idx}
                 href={`mailto:hello@vanstan.dev?subject=${encodeURIComponent(pill.subject)}`}
-                className={`service-pill px-5 py-3 rounded-full border font-mono text-xs uppercase tracking-wider flex items-center gap-2 transition-all ${
-                  pill.isAccent
-                    ? "border-[#F3DBC7]/30 bg-[#F3DBC7]/10 text-[#F3DBC7] hover:bg-[#F3DBC7] hover:text-black"
-                    : "border-white/10 bg-white/5 hover:bg-white hover:text-black"
-                }`}
+                className={`service-pill px-5 py-3 rounded-full border font-mono text-xs uppercase tracking-wider flex items-center gap-2 transition-all ${pill.isAccent
+                  ? "border-accent/30 bg-accent/10 text-accent hover:bg-accent hover:text-black"
+                  : "border-white/10 bg-white/5 hover:bg-white hover:text-black"
+                  }`}
               >
                 <span>{pill.label}</span>
                 <span>↗</span>
@@ -55,20 +53,17 @@ const Footer: React.FC<FooterProps> = ({ onOpenCredits }) => {
         {/* Bottom Footer Navigation & Social Links */}
         <div className="pt-12 border-t border-white/10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-8 font-mono text-xs uppercase tracking-widest text-white/60">
           <div className="flex flex-wrap items-center gap-6">
-            <a href="https://github.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+            <a href="https://github.com/vow-sta-n" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               GITHUB
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+            <a href="https://x.com/vowstan" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               TWITTER
             </a>
-            <a href="https://dribbble.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
-              DRIBBBLE
-            </a>
-            <a href="https://behance.net" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
-              BEHANCE
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/in/van-stan/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
               LINKEDIN
+            </a>
+            <a href="https://www.figma.com/@vanstan" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">
+              FIGMA
             </a>
           </div>
 

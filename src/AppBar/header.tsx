@@ -61,15 +61,15 @@ const AppBar: React.FC<AppBarProps> = () => {
         <div className="flex items-center">
           <a
             href="#hero"
-            className="group flex items-center gap-2 text-[#F8EEE4] hover:text-[#F3DBC7] transition-colors"
+            className="group flex items-center gap-2 text-highlight hover:text-accent transition-colors"
             aria-label="Van Stan - Home"
           >
-            <span className="font-sans font-bold text-sm sm:text-base tracking-tight uppercase">
+            <span className="font-sans font-bold text-sm sm:text-base  uppercase">
               Van Stan
             </span>
           </a>
-          <span className="hidden sm:inline-block font-sans font-medium text-xs sm:text-sm text-[#F8EEE4]/60 uppercase tracking-wider pl-4 sm:pl-6 ml-4 sm:ml-6 border-l border-white/20">
-            Psychologist, Engineer
+          <span className="hidden sm:inline-block font-sans font-medium text-xs sm:text-sm text-highlight/60 uppercase tracking-wider pl-4 sm:pl-6 ml-4 sm:ml-6 border-l border-white/20">
+            Psychology | Engineering | AI & Robotics
           </span>
         </div>
 
@@ -77,31 +77,31 @@ const AppBar: React.FC<AppBarProps> = () => {
         <nav id="main-menu" className="flex items-center gap-4 sm:gap-6 text-[11px] sm:text-xs font-medium" aria-label="Main Navigation">
           <a
             href="#cases"
-            className="relative font-sans uppercase tracking-widest text-[#F8EEE4]/80 hover:text-white focus:text-[#F3DBC7] focus:outline-none transition-colors group py-1"
+            className="relative font-sans uppercase tracking-widest text-highlight/80 hover:text-white focus:outline-none transition-colors group py-1"
           >
             <span className="relative inline-block">
               works
-              <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-[#F3DBC7] -translate-y-1/2 scale-x-0 origin-left group-hover:scale-x-100 group-focus:scale-x-100 group-focus-visible:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
+              <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-accent -translate-y-1/2 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
             </span>
           </a>
 
           <a
             href="#intro"
-            className="relative font-sans uppercase tracking-widest text-[#F8EEE4]/80 hover:text-white focus:text-[#F3DBC7] focus:outline-none transition-colors group py-1"
+            className="relative font-sans uppercase tracking-widest text-highlight/80 hover:text-white focus:outline-none transition-colors group py-1"
           >
             <span className="relative inline-block">
               about
-              <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-[#F3DBC7] -translate-y-1/2 scale-x-0 origin-left group-hover:scale-x-100 group-focus:scale-x-100 group-focus-visible:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
+              <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-accent -translate-y-1/2 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
             </span>
           </a>
 
           <a
             href="#footer"
-            className="relative font-sans uppercase tracking-widest text-[#F8EEE4]/80 hover:text-white focus:text-[#F3DBC7] focus:outline-none transition-colors group py-1"
+            className="relative font-sans uppercase tracking-widest text-highlight/80 hover:text-white focus:outline-none transition-colors group py-1"
           >
             <span className="relative inline-block">
               contact
-              <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-[#F3DBC7] -translate-y-1/2 scale-x-0 origin-left group-hover:scale-x-100 group-focus:scale-x-100 group-focus-visible:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
+              <span className="absolute top-1/2 left-0 w-full h-[1.5px] bg-accent -translate-y-1/2 scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none" />
             </span>
           </a>
         </nav>
@@ -109,7 +109,7 @@ const AppBar: React.FC<AppBarProps> = () => {
 
       {/* Signature Scroll Progress Indicator / Default Borderline with mx-10 */}
       <div
-        className="absolute bottom-0 left-0 right-0 mx-8 h-[1px] bg-[#555555] pointer-events-none overflow-hidden rounded-full"
+        className="absolute bottom-0 left-0 right-0 mx-8 h-[0.5px] bg-[#555555b8] pointer-events-none overflow-hidden rounded-full"
         role="presentation"
       >
         <div

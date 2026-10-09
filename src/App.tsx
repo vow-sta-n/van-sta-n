@@ -6,16 +6,15 @@ import Hero from "./components/Hero/Hero";
 import About from "./components/About/About";
 import Cases, { CaseItemData } from "./components/Cases/Cases";
 import CaseModal from "./components/CaseModal/CaseModal";
-import Featured from "./components/Featured/Featured";
 import Footer from "./components/Footer/Footer";
 import ProjectsDrawer from "./components/Drawers/ProjectsDrawer";
 import CreditsDrawer from "./components/Drawers/CreditsDrawer";
 import LoadingBanner from "./components/LoadingBanner/LoadingBanner";
+import ParallaxBackground from "./components/ParallaxBackground/ParallaxBackground";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const App: React.FC = () => {
-  const bgImageRef = useRef<HTMLImageElement | null>(null);
   const darkOverlayRef = useRef<HTMLDivElement | null>(null);
   const [activeCase, setActiveCase] = useState<CaseItemData | null>(null);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
@@ -36,22 +35,6 @@ const App: React.FC = () => {
   useEffect(() => {
     // Parallax motion & dynamic background transitions with native scroll
     const ctx = gsap.context(() => {
-      if (bgImageRef.current) {
-        gsap.fromTo(
-          bgImageRef.current,
-          { y: "0vh" },
-          {
-            y: "-50vh",
-            ease: "none",
-            scrollTrigger: {
-              trigger: "#hero",
-              start: "top top",
-              end: "bottom top",
-              scrub: true,
-            },
-          }
-        );
-      }
 
       if (darkOverlayRef.current) {
         const overlay = darkOverlayRef.current;
@@ -112,19 +95,12 @@ const App: React.FC = () => {
       <LoadingBanner />
 
       {/* Global Fixed Renaissance Fresco Background Under Entire Site with Parallax Motion */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden select-none">
-        <img
-          ref={bgImageRef}
-          src={`${import.meta.env.BASE_URL}images/hero-renaissance.jpg`}
-          alt="Renaissance artwork background"
-          className="w-full h-[155vh] max-w-none object-cover object-top filter brightness-[0.75] contrast-[1.05] will-change-transform"
-        />
-      </div>
+      <ParallaxBackground />
 
       {/* Dynamic Dark Grey Transition Overlay over Fresco */}
       <div
         ref={darkOverlayRef}
-        className="fixed inset-0 pointer-events-none z-[1] bg-[#0c0c0c] opacity-0 will-change-[opacity]"
+        className="fixed inset-0 pointer-events-none z-1 bg-[#0c0c0c] opacity-0 will-change-[opacity]"
         aria-hidden="true"
       />
 
@@ -140,7 +116,7 @@ const App: React.FC = () => {
         <About />
         <Cases onSelectCase={(item) => setActiveCase(item)} />
 
-        <Featured />
+        {/* <Featured /> */}
         <Footer onOpenCredits={() => setIsCreditsOpen(true)} />
       </main>
 

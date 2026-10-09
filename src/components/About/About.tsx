@@ -167,13 +167,13 @@ const About: React.FC = () => {
               HELLO. I AM VAN STAN
             </h2>
             <div className="text-right -mt-2">
-              <span className="font-serif text-base sm:text-lg text-[#F3DBC7] inline-block tracking-wide ">
+              <span className="font-serif text-base sm:text-lg text-accent inline-block tracking-wide ">
                 Yu
               </span>
               <span className="font-serif text-base sm:text-lg text-white inline-block tracking-wide">
                 van Sta
               </span>
-              <span className="font-serif text-base sm:text-lg text-[#F3DBC7] inline-block tracking-wide ">
+              <span className="font-serif text-base sm:text-lg text-accent inline-block tracking-wide ">
                 rsu
               </span>
               <span className="font-serif text-base sm:text-lg text-white inline-block tracking-wide">
@@ -185,22 +185,23 @@ const About: React.FC = () => {
           {/* Body Paragraph: Neue Montreal Uppercase Bold Editorial with Indent */}
           <div className="font-sans font-medium text-lg sm:text-2xl lg:text-[1.9rem] leading-[1.32] text-white uppercase tracking-[0.01em]">
             <p className="indent-16 sm:indent-28 lg:indent-36">
-              I AM A SELF-TAUGHT SOFTWARE ENGINEER WITH A BACKGROUND IN PSYCHOLOGY, CURRENTLY PURSUING AN M.SC. IN AI & MACHINE LEARNING. MY EARLY FOUNDATIONS TOOK ROOT IN C/C++ AND LINUX, EXPERIMENTING WITH REVERSE ENGINEERING, ALGORITHMS, AND VOICE ASSISTANTS. DRIVEN BY A DESIRE TO DECODE INTELLIGENCE AND BIOMIMIC COGNITION IN AI, I STUDIED NEUROSCIENCE AND EARNED A B.SC. IN PSYCHOLOGY—APPLYING COGNITIVE AND HCI PRINCIPLES TO HUMAN-CENTERED SOFTWARE ARCHITECTURES. TODAY, I BRIDGE FULL-STACK ENGINEERING AND MACHINE LEARNING WITH COGNITIVE SCIENCE TO BUILD ROBUST OPEN-SOURCE UTILITIES, SCALABLE MOBILE AND WEB APPLICATIONS, AND EMBEDDED R&D PLATFORMS.
+              Rooted in early C/C++ and Linux experimentation, my drive to understand intelligence led me to study psychology and neuroscience. Everything I learn across software engineering, psychology, and machine learning converges on a single lifelong goal: to build a real-world Artificial General Intelligence—a human-like mind and a truly honest friend.
             </p>
           </div>
+          <div></div>
         </div>
 
         {/* Right Column: Interactive 3D WebGL Canvas & Doodle */}
         <div className="lg:col-span-5 relative flex flex-col items-center justify-center">
           {/* 3D Canvas Container - Portrait Rectangle */}
-          <div className="w-full aspect-[3/4] max-w-[480px] relative group flex items-center justify-center">
-            <canvas ref={canvasRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
+          <div className="w-full aspect-3/4 max-w-120 relative group flex items-center justify-center">
+            <canvas ref={canvasRef} className="w-full h-full active:cursor-grabbing" />
 
             {/* Elegant Loading State */}
             {loadingProgress !== null && (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-transparent backdrop-blur-none pointer-events-none transition-opacity duration-500">
-                <div className="w-8 h-8 rounded-full border-2 border-[#F3DBC7]/20 border-t-[#F3DBC7] animate-spin" />
-                <span className="font-mono text-xs text-[#F3DBC7] uppercase tracking-widest">
+                <div className="w-8 h-8 rounded-full border-2 border-accent/20 border-t-accent animate-spin" />
+                <span className="font-mono text-xs text-accent uppercase tracking-widest">
                   Loading 3D Sculpture {loadingProgress > 0 ? `${loadingProgress}%` : ""}
                 </span>
               </div>
@@ -208,7 +209,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Hand-drawn SVG Doodle & Arrow */}
-          <div className="absolute -bottom-10 -left-6 sm:-left-10 z-10 pointer-events-none select-none text-[#F3DBC7]">
+          <div className="absolute -bottom-10 -left-6 sm:-left-10 z-10 pointer-events-none select-none text-accent">
             <div className="flex items-center gap-3">
               <p className="font-serif italic text-base sm:text-lg tracking-wide whitespace-nowrap">
                 "I am not this one"
@@ -219,7 +220,7 @@ const About: React.FC = () => {
                 viewBox="0 0 104 54"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-16 h-8 text-[#F3DBC7]"
+                className="w-16 h-8 text-accent"
               >
                 <path
                   d="M4.66 4.442C19.968 3.87 51.687 7.98 59.806 10.15c8.119 2.17 42.004 11.335 42.193 22.216.19 10.881-23.966 21.44-51.095 18.938C23.775 48.802 2.174 36.415 2.001 25.7 1.828 14.986 19.498 5.55 42.092 2.767c22.595-2.785 62.01 7.677 49.853 28.879"

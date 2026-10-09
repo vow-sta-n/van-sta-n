@@ -52,15 +52,15 @@ const Hero: React.FC = () => {
       <div className="w-full flex flex-col lg:flex-row justify-between items-end gap-8 lg:gap-10">
 
         {/* Left Column: Monumental Titles (Bottom-Left) */}
-        <div className="w-full lg:w-[56%] flex flex-col justify-end items-start text-[#F8EEE4] font-semibold ">
-          <span className="hero-tagline font-serif italic text-0.5xl sm:text-1xl lg:text-2xl text-[#F8EEE4] tracking-tight block mb-8 pl-1">
+        <div className="w-full lg:w-[56%] flex flex-col justify-end items-start text-highlight font-semibold ">
+          <span className="hero-tagline font-serif italic text-0.5xl sm:text-1xl lg:text-2xl text-highlight tracking-tight block mb-8 pl-1">
             (self-taught)
           </span>
 
           <div className="hero-title-line">
             <h1 className=" flex items-baseline gap-2 sm:gap-4">
               <span className="font-monumental text-[33vw] sm:text-[9.5vw] lg:text-[16.5vw] uppercase tracking-[0.002em]">Engineer</span>
-              <span className="font-serif font-semibold text-[2rem] text-[#F3DBC7] tracking-tighter leading-none">
+              <span className="font-serif font-semibold text-[2rem] text-accent tracking-tighter leading-none">
                 &
               </span>
             </h1>
@@ -76,7 +76,7 @@ const Hero: React.FC = () => {
         {/* Right Column: Bio Paragraph & Contact Button (40% Width) */}
         <div className="w-full lg:w-[40%] flex flex-col items-start lg:items-end justify-end space-y-6 pb-2 sm:pb-3">
           <div className="hero-desc-box w-full space-y-3 text-left">
-            <p className="w-full font-sans font-medium text-base sm:text-lg lg:text-[1.75rem] uppercase tracking-tight text-[#F8EEE4] leading-[1.3] indent-12 sm:indent-16 lg:indent-20">
+            <p className="w-full font-sans font-medium text-base sm:text-lg lg:text-[1.75rem] uppercase tracking-tight text-highlight leading-[1.3] indent-12 sm:indent-16 lg:indent-20">
               I AM A SELF-TAUGHT SOFTWARE ENGINEER WITH A BACKGROUND IN PSYCHOLOGY. I COMBINE SOFTWARE ENGINEERING WITH COGNITIVE PRINCIPLES TO BUILD PRACTICAL TOOLS ACROSS MOBILE, WEB, AND EMBEDDED SYSTEMS.
             </p>
           </div>

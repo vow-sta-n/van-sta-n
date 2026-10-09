@@ -10,7 +10,7 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[10000] bg-black/80 backdrop-blur-md transition-opacity duration-300 flex justify-end"
+      className="fixed inset-0 z-10000 bg-black/80 backdrop-blur-md transition-opacity duration-300 flex justify-end"
       onClick={onClose}
     >
       <div
@@ -19,7 +19,7 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = ({ isOpen, onClose }) => {
       >
         <div className="space-y-8">
           <div className="flex justify-between items-center border-b border-white/10 pb-6">
-            <h3 className="font-display text-2xl font-bold uppercase tracking-tight">
+            <h3 className="font-mono text-3xl font-bold uppercase">
               Credits & Tech Stack
             </h3>
             <button
