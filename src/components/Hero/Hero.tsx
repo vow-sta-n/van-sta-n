@@ -2,10 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  isLoaded?: boolean;
+}
+
+const Hero: React.FC<HeroProps> = ({ isLoaded = true }) => {
   const heroRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
+    if (!isLoaded) return;
+
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: "power3.out", duration: 1.2 } });
 
@@ -39,7 +45,7 @@ const Hero: React.FC = () => {
     }, heroRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isLoaded]);
 
   return (
     <section

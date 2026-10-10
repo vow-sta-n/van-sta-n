@@ -9,18 +9,39 @@ import CaseModal from "./components/CaseModal/CaseModal";
 import Footer from "./components/Footer/Footer";
 import ProjectsDrawer from "./components/Drawers/ProjectsDrawer";
 import CreditsDrawer from "./components/Drawers/CreditsDrawer";
-import LoadingBanner from "./components/LoadingBanner/LoadingBanner";
 import ParallaxBackground from "./components/ParallaxBackground/ParallaxBackground";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const App: React.FC = () => {
+interface AppProps {
+  onReady?: () => void;
+  isLoaded?: boolean;
+}
+
+const App: React.FC<AppProps> = ({ onReady, isLoaded = false }) => {
   const darkOverlayRef = useRef<HTMLDivElement | null>(null);
   const [activeCase, setActiveCase] = useState<CaseItemData | null>(null);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isCreditsOpen, setIsCreditsOpen] = useState(false);
 
-  // Lock body scroll when modals or drawers are open
+  // Notify parent root when App has mounted in DOM
+  useEffect(() => {
+    if (onReady) {
+      onReady();
+    }
+  }, [onReady]);
+
+  // Refresh ScrollTrigger when preloader completes and scroll unlocks
+  useEffect(() => {
+    if (isLoaded) {
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [isLoaded]);
+
+  // Lock body scroll ONLY when interactive modals or drawers are actively open
   useEffect(() => {
     if (activeCase || isProjectsOpen || isCreditsOpen) {
       document.body.style.overflow = "hidden";
@@ -91,16 +112,13 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-background text-[#f5f5f5] min-h-screen selection:bg-accent selection:text-background relative">
-      {/* SVG Loading Banner Overlay with Centered Inverted Triangle Reveal */}
-      <LoadingBanner />
-
       {/* Global Fixed Renaissance Fresco Background Under Entire Site with Parallax Motion */}
-      <ParallaxBackground />
+      <ParallaxBackground isLoaded={isLoaded} />
 
       {/* Dynamic Dark Grey Transition Overlay over Fresco */}
       <div
         ref={darkOverlayRef}
-        className="fixed inset-0 pointer-events-none z-1 bg-[#0c0c0c] opacity-0 will-change-[opacity]"
+        className="fixed inset-0 pointer-events-none z-[1] bg-[#0c0c0c] opacity-0 will-change-[opacity]"
         aria-hidden="true"
       />
 
@@ -111,7 +129,7 @@ const App: React.FC = () => {
 
       {/* Main Content Sections Scrolling Over Fixed Background */}
       <main id="main-content" className="relative z-10">
-        <Hero />
+        <Hero isLoaded={isLoaded} />
         <div className="h-80"></div>
         <About />
         <Cases onSelectCase={(item) => setActiveCase(item)} />

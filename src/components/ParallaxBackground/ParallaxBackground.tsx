@@ -164,7 +164,11 @@ const renderLayer = (layer: LayerDef, extraClassName = "") => (
   </div>
 );
 
-const ParallaxBackground: React.FC = () => {
+interface ParallaxBackgroundProps {
+  isLoaded?: boolean;
+}
+
+const ParallaxBackground: React.FC<ParallaxBackgroundProps> = ({ isLoaded = true }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   // Scroll parallax layer refs (nested outer containers)
@@ -190,6 +194,8 @@ const ParallaxBackground: React.FC = () => {
   const birdsFloatRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    if (!isLoaded) return;
+
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
@@ -329,10 +335,16 @@ const ParallaxBackground: React.FC = () => {
       }
     }, containerRef);
 
+    // Refresh ScrollTrigger after triggers are registered so coordinates are exact
+    requestAnimationFrame(() => {
+      ScrollTrigger.refresh();
+    });
+
     // 3. Desktop Interactive Mouse Parallax (subtle 3D diorama tilt)
     let removeMouseListener: (() => void) | undefined;
+    const hasPointer = window.matchMedia("(pointer: fine)").matches || window.innerWidth > 768;
 
-    if (!prefersReducedMotion && window.matchMedia("(pointer: fine)").matches) {
+    if (!prefersReducedMotion && hasPointer) {
       const quickSkyX = skyMouseRef.current
         ? gsap.quickTo(skyMouseRef.current, "x", { duration: 1.2, ease: "power2.out" })
         : null;
@@ -426,7 +438,7 @@ const ParallaxBackground: React.FC = () => {
       ctx.revert();
       removeMouseListener?.();
     };
-  }, []);
+  }, [isLoaded]);
 
   return (
     <div
